@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 400px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.balance {
+    margin-bottom: 20px;
+}
+
+.balance h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+h3 {
+    margin: 20px 0 10px;
+}
+
+div > div {
+    margin: 10px 0;
+}
+
+.income-form, .transaction-form {
+    margin: 20px 0;
+}
+
+
+.income-form input, .transaction-form input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.income-form button, .transaction-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.income-form button:hover, .transaction-form button:hover {
+    background-color: #218838;
+}
+
+.transactions {
+    text-align: left;
+}
+
+.transactions h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.transactions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transactions li {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-right: 5px solid;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.transactions li.income {
+    border-color: #28a745;
+}
+
+.transactions li.expense {
+    border-color: #dc3545;
+}
+
+.transactions .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.transactions .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.totals-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-item {
+    flex: 1;
+    text-align: center;
+}
+
+.total-item h4 {
+    margin: 0;
+}
+
+.total-item span {
+    font-weight: bold;
+    color: #333;
+}
