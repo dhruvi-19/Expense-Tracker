@@ -6,7 +6,6 @@ document.getElementById('balance').innerText = `$${balance.toFixed(2)}`;
 document.getElementById('totalIncome').innerText = `$${totalIncome.toFixed(2)}`;
 document.getElementById('totalExpense').innerText = `$${totalExpense.toFixed(2)}`;
 
-
 document.getElementById('addIncome').addEventListener('click', function() {
     const incomeAmount = parseFloat(document.getElementById('incomeAmount').value);
     if (!isNaN(incomeAmount) && incomeAmount > 0) {
@@ -35,6 +34,32 @@ document.getElementById('addTransaction').addEventListener('click', function() {
     }
 });
 
+function deleteTransaction(index) {
+    const transactionList = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    if (index >= 0 && index < transactionList.length) {
+        const deletedTransaction = transactionList.splice(index, 1)[0];
+
+        if (deletedTransaction.type === 'income') {
+            totalIncome -= deletedTransaction.amount;
+            balance -= deletedTransaction.amount;
+        } else if (deletedTransaction.type === 'expense') {
+            totalExpense -= deletedTransaction.amount;
+            balance += deletedTransaction.amount;
+        }
+
+        localStorage.setItem('transactions', JSON.stringify(transactionList));
+        updateDisplay();
+
+        const transactionItems = document.querySelectorAll('#transactionList li');
+        transactionItems[index].remove();
+
+        const remainingItems = document.querySelectorAll('#transactionList .delete-btn');
+        remainingItems.forEach((button, idx) => {
+            button.dataset.index = idx;
+        });
+    }
+}
 
 function addTransaction(description, amount, type) {
     const transactionList = JSON.parse(localStorage.getItem('transactions')) || [];
@@ -53,32 +78,11 @@ function addTransaction(description, amount, type) {
     document.getElementById('transactionList').appendChild(transactionItem);
 }
 
-function deleteTransaction(index) {
-    const transactionList = JSON.parse(localStorage.getItem('transactions')) || [];
-
-    if (index >= 0 && index < transactionList.length) {
-        const deletedTransaction = transactionList.splice(index, 1)[0];
-
-        if (deletedTransaction.type === 'income') {
-            totalIncome -= deletedTransaction.amount;
-            balance -= deletedTransaction.amount;
-        } else if (deletedTransaction.type === 'expense') {
-            totalExpense -= deletedTransaction.amount;
-            balance += deletedTransaction.amount;
-        }
-
-        localStorage.setItem('transactions', JSON.stringify(transactionList));
-        updateDisplay();
-    }
-}
-
 function updateDisplay() {
     document.getElementById('balance').innerText = `$${balance.toFixed(2)}`;
     document.getElementById('totalIncome').innerText = `$${totalIncome.toFixed(2)}`;
     document.getElementById('totalExpense').innerText = `$${totalExpense.toFixed(2)}`;
 }
-
-
 
 document.getElementById('transactionList').addEventListener('click', function(event) {
     if (event.target.classList.contains('delete-btn')) {
@@ -86,7 +90,6 @@ document.getElementById('transactionList').addEventListener('click', function(ev
         deleteTransaction(index);
     }
 });
-
 
 window.onload = function() {
     const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
