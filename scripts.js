@@ -22,7 +22,10 @@ document.getElementById('addTransaction').addEventListener('click', function() {
     const description = document.getElementById('description').value;
     const amount = parseFloat(document.getElementById('amount').value);
 
-    if (description !== '' && !isNaN(amount) && amount > 0 && balance > amount) {
+    if(balance < amount){
+        alert('Your balance is insufficient');
+    }
+    else if (description !== '' && !isNaN(amount) && amount > 0) {
         totalExpense += amount;
         balance -= amount;
         addTransaction(description, amount, 'expense');
