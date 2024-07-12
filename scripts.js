@@ -22,7 +22,7 @@ document.getElementById('addTransaction').addEventListener('click', function() {
     const description = document.getElementById('description').value;
     const amount = parseFloat(document.getElementById('amount').value);
 
-    if (description !== '' && !isNaN(amount) && amount > 0) {
+    if (description !== '' && !isNaN(amount) && amount > 0 && balance > amount) {
         totalExpense += amount;
         balance -= amount;
         addTransaction(description, amount, 'expense');
